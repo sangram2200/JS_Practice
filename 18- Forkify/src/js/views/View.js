@@ -1,9 +1,10 @@
 import icons from 'url:../../img/icons.svg';
 
+//parent class for all the views
 export default class View {
   _data;
 
-  //render method to render recipes ie view
+  //render method to render recipes/search results ie view
   render(data) {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();

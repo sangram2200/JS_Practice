@@ -8,16 +8,18 @@ class ResultsView extends View {
 
   //generate search results and display in the result view
   _generateMarkup() {
-    console.log(this._data);
     return `
         ${this._data.map(this._generateMarkupPreview).join('')}  
       `;
   }
 
   _generateMarkupPreview(res) {
+    const id = window.location.hash.slice(1);
     return `
         <li class="preview">
-            <a class="preview__link " href="#${res.id}">
+            <a class="preview__link ${
+              res.id === id ? 'preview__link--active' : ''
+            }" href="#${res.id}">
             <figure class="preview__fig">
                 <img src="${res.image}" alt="${res.title}" />
             </figure>

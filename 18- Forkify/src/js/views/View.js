@@ -5,12 +5,15 @@ export default class View {
   _data;
 
   //render method to render recipes/search results ie view
-  render(data) {
+  render(data, render = true) {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
 
     this._data = data;
     const markup = this._generateMarkup();
+
+    if (!render) return markup;
+
     this._clear();
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
@@ -29,7 +32,8 @@ export default class View {
       // updates changed text
       if (
         !newEl.isEqualNode(curEl) &&
-        newEl.firstChild?.nodeValue.trim() !== ''
+        newEl.firstChild?.nodeValue.trim() !== '' &&
+        newEl.firstChild?.nodeValue.trim() !== undefined
       ) {
         curEl.textContent = newEl.textContent;
       }
